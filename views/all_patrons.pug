@@ -1,19 +1,47 @@
 extends layout
 
 block content
-
-/*Page header and link to create a new patron */
+  // Page heading and link to create a new patron
   h1 All Patrons
-  a(href="/patrons/new") Add New Patron
+  div.create-search-container
+    a.button(href="/patrons/new") Create New Patron
+    form(method="get")
+      input(type="search" name="search" placeholder="Search..." value=search)
+      button.search-btn(type="submit") Search
 
-  /*Patron list container*/
-  ul
-  /*If no patrons match the search, show a friendly message*/
-    if patrons.length === 0
-      li No results found
-    else
-    /*Loop through each patron and render a list item*/
-      each patron in patrons
+  // Table of patrons with full details
+  table
+    thead
+      tr
+        th Name
+        th Address
+        th Email
+        th Library ID
+        th Zip
+    tbody
+      if patrons.length === 0
+        tr
+          td(colspan="5") No results found
+      else
+        each patron in patrons
+          tr
+            td
+              a(href=`/patrons/${patron.id}`)
+                | #{patron.first_name} #{patron.last_name}
+            td #{patron.address}
+            td #{patron.email}
+            td #{patron.library_id}
+            td #{patron.zip_code}
+
+  // Pagination links
+  nav.pagination
+    ul
+      if page > 1
         li
-          a(href=`/patrons/${patron.id}`)
-            | #{patron.first_name} #{patron.last_name} (Library ID: #{patron.library_id})
+          a(href=`?page=${page - 1}&search=${search}`) Previous
+      each num in [...Array(totalPages).keys()].map(n => n + 1)
+        li(class= num === page ? 'active' : '')
+          a(href=`?page=${num}&search=${search}`) #{num}
+      if page < totalPages
+        li
+          a(href=`?page=${page + 1}&search=${search}`) Next

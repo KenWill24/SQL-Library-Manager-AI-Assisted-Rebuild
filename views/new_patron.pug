@@ -1,32 +1,44 @@
 extends layout
 
 block content
+  // Page heading for the new patron form
   h1 New Patron
 
+  // Display validation errors if any exist
   if errors
-    ul.errors
+    h2.error Oooops!
+    ul.error
       each error in errors
         li= error.message
 
+  // Form for creating a new patron
   form(action="/patrons/new" method="POST")
-    label(for="first_name") First Name:
-    input#first_name(type="text" name="first_name" value=patron.first_name)
-    br
 
-    label(for="last_name") Last Name:
-    input#last_name(type="text" name="last_name" value=patron.last_name)
-    br
+    // First Name field
+    p
+      label(for="first_name") First Name:
+      input#first_name(type="text" name="first_name" value=patron.first_name)
 
-    label(for="address") Address:
-    input#address(type="text" name="address" value=patron.address)
-    br
+    // Last Name field
+    p
+      label(for="last_name") Last Name:
+      input#last_name(type="text" name="last_name" value=patron.last_name)
 
-    label(for="email") Email:
-    input#email(type="email" name="email" value=patron.email)
-    br
+    // Address field
+    p
+      label(for="address") Address:
+      input#address(type="text" name="address" value=patron.address)
 
-    label(for="zip_code") Zip Code:
-    input#zip_code(type="text" name="zip_code" value=patron.zip_code)
-    br
+    // Email field
+    p
+      label(for="email") Email:
+      input#email(type="email" name="email" value=patron.email)
 
-    button(type="submit") Create Patron
+    // Zip Code field
+    p
+      label(for="zip_code") Zip Code:
+      input#zip_code(type="text" name="zip_code" value=patron.zip_code)
+
+    // Submit button
+    p
+      input(type="submit" value="Create New Patron")

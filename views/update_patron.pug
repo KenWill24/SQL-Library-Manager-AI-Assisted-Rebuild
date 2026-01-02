@@ -1,37 +1,42 @@
 extends layout
 
 block content
-/*Page heading for the update form*/
-  h1 Update Patron
+  // Page heading with patron name
+  h1 Patron: #{patron.first_name} #{patron.last_name}
 
-  /*Display validation errors if any exist*/
-
+  // Display validation errors if any exist
   if errors
-    ul.errors
+    h2.error Oooops!
+    ul.error
       each error in errors
         li= error.message
 
+  // Update form
   form(action=`/patrons/${patron.id}?_method=PUT` method="POST")
-    label(for="first_name") First Name:
-    input#first_name(type="text" name="first_name" value=patron.first_name)
-    br
+    p
+      label(for="first_name") First Name:
+      input#first_name(type="text" name="first_name" value=patron.first_name)
 
-    label(for="last_name") Last Name:
-    input#last_name(type="text" name="last_name" value=patron.last_name)
-    br
+    p
+      label(for="last_name") Last Name:
+      input#last_name(type="text" name="last_name" value=patron.last_name)
 
-    label(for="address") Address:
-    input#address(type="text" name="address" value=patron.address)
-    br
+    p
+      label(for="address") Address:
+      input#address(type="text" name="address" value=patron.address)
 
-    label(for="email") Email:
-    input#email(type="email" name="email" value=patron.email)
-    br
+    p
+      label(for="email") Email:
+      input#email(type="email" name="email" value=patron.email)
 
-    label(for="zip_code") Zip Code:
-    input#zip_code(type="text" name="zip_code" value=patron.zip_code)
-    br
+    p
+      label(for="zip_code") Zip Code:
+      input#zip_code(type="text" name="zip_code" value=patron.zip_code)
 
+    // Display library ID (not editable)
     p Library ID: #{patron.library_id}
 
-    button(type="submit") Update Patron
+    // Submit button
+    p
+      input(type="submit" value="Update")
+

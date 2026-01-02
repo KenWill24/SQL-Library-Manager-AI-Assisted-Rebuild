@@ -54,9 +54,9 @@ app.use((err, req, res, next) => {
   console.log(`Error Status: ${err.status}`);
   console.log(`Error Message: ${err.message}`);
 
-  res.status(err.status);
+  res.status(err.status || 500);
   // Pass {err} to the error template
-  res.render('error', { err });
+  res.render('error', { error: err });
 });
 
 module.exports = app;

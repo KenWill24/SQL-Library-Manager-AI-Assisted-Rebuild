@@ -1,7 +1,10 @@
-extends layout
+doctype html
+html
+  head
+    title Error
+    link(rel="stylesheet" href="/stylesheets/style.css")
+  body
+    h1 Uh Oh! Status: #{error.status || 500}
+    p #{error.message || 'Something went wrong.'}
+    a.button(href="/") Home
 
-block content
-  h1= err.message
-  h2 Status: #{err.status}
-  if err.stack
-    pre #{err.stack}

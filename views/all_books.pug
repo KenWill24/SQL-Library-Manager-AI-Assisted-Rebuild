@@ -3,16 +3,44 @@ extends layout
 block content
   // Page heading and link to create a new book
   h1 All Books
-  a(href="/books/new") Add New Book
 
-  // Container for the list of books
-  ul
-    // Show a friendly message when no books match the search or pagination
-    if books.length === 0
-      li No results found
-    else
-      // Loop through each book and render a link to its detail page
-      each book in books
+  // Search bar and "Create New Book" button container
+  div.create-search-container
+    a.button(href="/books/new") Create New Book
+    form(method="get")
+      input(type="search" name="search" placeholder="Search..." value=search)
+      button.search-btn(type="submit") Search
+
+  // Table of books with headers and alternating row styling
+  table
+    thead
+      tr
+        th Title
+        th Author
+        th Genre
+        th Year Released
+    tbody
+      if books.length === 0
+        tr
+          td(colspan="4") No results found
+      else
+        each book in books
+          tr
+            td
+              a(href=`/books/${book.id}`) #{book.title}
+            td #{book.author}
+            td #{book.genre}
+            td #{book.first_published}
+
+  // Pagination links
+  nav.pagination
+    ul
+      if page > 1
         li
-          a(href=`/books/${book.id}`)
-            | #{book.title} by #{book.author}
+          a(href=`?page=${page - 1}&search=${search}`) Previous
+      each num in [...Array(totalPages).keys()].map(n => n + 1)
+        li(class= num === page ? 'active' : '')
+          a(href=`?page=${num}&search=${search}`) #{num}
+      if page < totalPages
+        li
+          a(href=`?page=${page + 1}&search=${search}`) Next
