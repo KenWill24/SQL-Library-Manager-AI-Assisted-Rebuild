@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  h1 Update Book
+
+  if errors
+    ul
+      each error in errors
+        li= error.message
+
+  form(action=`/books/${book.id}?_method=PUT` method="POST")
+    label Title:
+    input(type="text" name="title" value=book.title)
+    br
+
+    label Author:
+    input(type="text" name="author" value=book.author)
+    br
+
+    label Genre:
+    input(type="text" name="genre" value=book.genre)
+    br
+
+    label First Published:
+    input(type="number" name="first_published" value=book.first_published)
+    br
+
+    button(type="submit") Update Book

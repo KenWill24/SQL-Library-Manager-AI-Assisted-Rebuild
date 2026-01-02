@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  // Page heading and link to create a new book
+  h1 All Books
+  a(href="/books/new") Add New Book
+
+  // Container for the list of books
+  ul
+    // Show a friendly message when no books match the search or pagination
+    if books.length === 0
+      li No results found
+    else
+      // Loop through each book and render a link to its detail page
+      each book in books
+        li
+          a(href=`/books/${book.id}`)
+            | #{book.title} by #{book.author}

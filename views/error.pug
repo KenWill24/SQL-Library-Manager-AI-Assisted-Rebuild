@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h1= err.message
+  h2 Status: #{err.status}
+  if err.stack
+    pre #{err.stack}

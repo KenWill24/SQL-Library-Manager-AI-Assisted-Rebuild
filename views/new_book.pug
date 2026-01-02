@@ -1,0 +1,38 @@
+extends layout
+
+block content
+  // Page heading for the new book form
+  h1 New Book
+
+  // Display validation errors if any exist
+  if errors
+    ul
+      each error in errors
+        li= error.message
+
+  // Form for creating a new book entry
+  form(action="/books/new" method="POST")
+
+    // Title field (required)
+    label Title:
+    input(type="text" name="title" value=book.title required)
+    br
+
+    // Author field (required)
+    label Author:
+    input(type="text" name="author" value=book.author required)
+    br
+
+    // Genre field
+    label Genre:
+    input(type="text" name="genre" value=book.genre)
+    br
+
+    // First published year field
+    label First Published:
+    input(type="number" name="first_published" value=book.first_published)
+    br
+
+    // Submit button to create the new book
+    button(type="submit") Create Book
+

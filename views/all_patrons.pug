@@ -1,0 +1,19 @@
+extends layout
+
+block content
+
+/*Page header and link to create a new patron */
+  h1 All Patrons
+  a(href="/patrons/new") Add New Patron
+
+  /*Patron list container*/
+  ul
+  /*If no patrons match the search, show a friendly message*/
+    if patrons.length === 0
+      li No results found
+    else
+    /*Loop through each patron and render a list item*/
+      each patron in patrons
+        li
+          a(href=`/patrons/${patron.id}`)
+            | #{patron.first_name} #{patron.last_name} (Library ID: #{patron.library_id})

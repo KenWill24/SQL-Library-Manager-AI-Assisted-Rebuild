@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  h1 New Patron
+
+  if errors
+    ul.errors
+      each error in errors
+        li= error.message
+
+  form(action="/patrons/new" method="POST")
+    label(for="first_name") First Name:
+    input#first_name(type="text" name="first_name" value=patron.first_name)
+    br
+
+    label(for="last_name") Last Name:
+    input#last_name(type="text" name="last_name" value=patron.last_name)
+    br
+
+    label(for="address") Address:
+    input#address(type="text" name="address" value=patron.address)
+    br
+
+    label(for="email") Email:
+    input#email(type="email" name="email" value=patron.email)
+    br
+
+    label(for="zip_code") Zip Code:
+    input#zip_code(type="text" name="zip_code" value=patron.zip_code)
+    br
+
+    button(type="submit") Create Patron
