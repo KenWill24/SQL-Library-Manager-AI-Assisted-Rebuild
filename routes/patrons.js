@@ -20,6 +20,7 @@ router.get("/", async (req, res, next) => {
             { email: { [Op.like]: `%${search}%` } },
             { library_id: { [Op.like]: `%${search}%` } },
             { address: { [Op.like]: `%${search}%` } },
+            { zip_code: { [Op.like]: `%${search}%` } }
           ]
         }
       : {};
